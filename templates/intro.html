@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>술멍 - 전통주와 함께하는 느긋한 시간</title>
+    <style>
+        @font-face{
+            font-family: 'GeneralKimJwajin_Bold';
+            src: url('/static/fonts/GeneralKimJwajin_Bold.ttf');
+        }
+        @font-face{
+            font-family: 'ChungjuKimSaeng';
+            src: url('/static/fonts/ChungjuKimSaeng.ttf');
+        }
+        @font-face{
+            font-family: 'GapyeongHanseokbongB';
+            src: url('/static/fonts/GapyeongHanseokbongB.ttf');
+        }
+        body {
+            font-family: 'GeneralKimJwajin_Bold', sans-serif;     
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background: url("{{ url_for('static', filename='mainback.png') }}") no-repeat center center fixed;
+            background-size: cover;
+        }
+        .background-img {
+            opacity: 0.8; /* 배경 투명도 설정 */
+            z-index: -1;
+        }
+        
+        .header {
+            width: 100%;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-family: 'GapyeongHanseokbongB', sans-serif;
+        }
+        .logo {
+            font-size: 1em;
+            font-weight: bold;
+        }
+        .logo img {
+            max-height: 50px;
+        }
+        .menu {
+            display: flex;
+            gap: 60px;
+            margin: 0 auto;
+        }
+        .menu-item {
+            font-size: 1.5em;
+            text-decoration: none;
+            color: #000;
+        }
+        .menu-item:hover {
+            text-decoration: underline;
+        }
+        .container {
+            display: flex;
+            height: calc(100vh - 80px);
+            position: relative;
+        }
+        .right-banner {
+            width: 40%;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            right: 0;
+            top: 80px;
+            height: calc(100vh - 80px);
+            overflow: hidden;
+        }
+        .banner-slider {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .banner-image {
+            width: 100%;
+            flex-shrink: 0;
+        }
+        .left-content {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 50px;
+        }
+        .headline {
+            font-size: 2.7em;
+            font-weight: bold;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            margin-left: 2em;
+        }
+        .explore-button {
+            padding: 5px 10px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            font-size: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-left: 4.5em;
+            width: 190px;
+            height: 65px;
+        }
+        .explore-button:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo"><img src="{{ url_for('static', filename='logo.png') }}" alt="Logo"></div>
+        <div class="menu">
+            <a href="{{ url_for('main_page') }}" class="menu-item">전통주 추천</a>
+            <a href="{{ url_for('recipe') }}" class="menu-item">칵테일 레시피</a>
+            <a href="{{ url_for('quiz') }}" class="menu-item">전통주 퀴즈</a>
+            <a href="{{ url_for('bar') }}" class="menu-item">챗봇</a>
+        </div>
+    </div>
+    <div class="container">
+        <!-- Left content section -->
+        <div class="left-content">
+            <div class="headline">
+                "술멍"에서 전통주의 깊은 맛과 향을 즐기며, <br>술 한 잔과 함께 멍하니 누리는 완벽한 휴식을<br>누려보세요.
+            </div>
+            <button onclick="location.href='/main'" class="explore-button">둘러보기</button>
+        </div>
+        <!-- Right banner section -->
+        <div class="right-banner">
+            <div class="banner-slider" id="bannerSlider">
+                <img src="{{ url_for('static', filename='1.jpg') }}" alt="Banner 1" class="banner-image">
+                <img src="{{ url_for('static', filename='2.jpg') }}" alt="Banner 2" class="banner-image">
+                <img src="{{ url_for('static', filename='3.jpg') }}" alt="Banner 3" class="banner-image">
+            </div>
+        </div>
+    </div>
+    <div class="monthly-top-sales" style="margin: 150px auto; width: 90%; text-align: center;">
+        <h2 style="font-size: 2em; margin-bottom: 20px;">10월의 술</h2>
+        <div class="top-sales-slider" style="display: flex; justify-content: center; gap: 0px;">
+            <div class="sale-item" style="flex: 1; max-width: 30%;">
+                <a href="https://thesool.com/front/find/M000000082/view.do?searchType=2&searchKey=&searchKind=&levelType=&searchString=%EC%9D%B4%EA%B0%95%EC%A3%BC&productId=PR00000997&pageIndex=1&categoryNm=&kind="><img src="{{ url_for('static', filename='banner/1위.png') }}"></a>
+                <p style="margin-top: 10px; font-size: 1.2em;">전주 이강주</p>
+            </div>
+            <div class="sale-item" style="flex: 1; max-width: 30%;">
+                <a href="https://thesool.com/front/find/M000000082/view.do?searchType=2&searchKey=&searchKind=&levelType=&searchString=%EB%B0%B1%EC%A0%9C&productId=PR00001019&pageIndex=1&categoryNm=&kind="><img src="{{ url_for('static', filename='banner/2위.png') }}"></a>
+                <p style="margin-top: 10px; font-size: 1.2em;">백제 소주</p>
+            </div>
+            <div class="sale-item" style="flex: 1; max-width: 30%;">
+                <a href="https://thesool.com/front/find/M000000082/view.do?searchType=2&searchKey=&searchKind=&levelType=&searchString=%ED%95%B4%EC%B0%BD&productId=PR00001053&pageIndex=1&categoryNm=&kind="><img src="{{ url_for('static', filename='banner/3위.png') }}"></a>
+                <p style="margin-top: 10px; font-size: 1.2em;">해창 막걸리</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            const slider = document.getElementById('bannerSlider');
+            const totalSlides = slider.children.length;
+            if (index >= totalSlides) {
+                currentIndex = 0;
+            } else if (index < 0) {
+                currentIndex = totalSlides - 1;
+            } else {
+                currentIndex = index;
+            }
+            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        function autoSlide() {
+            currentIndex++;
+            showSlide(currentIndex);
+        }
+
+        setInterval(autoSlide, 3000);
+    </script>
+    <footer style="background-color: #d1d1d1; text-align: center; padding: 30px; position: relative; width: 100%;">
+        &copy; 2024 술멍. All rights reserved.
+    </footer>
+</body>
+</html>

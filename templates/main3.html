@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전통주 퀴즈</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+
+        @font-face{
+            font-family: 'DOS';
+            src: url('/static/fonts/ChungjuKimSaeng.ttf');
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            background: url("{{ url_for('static', filename='퀴즈.png') }}") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .top-header {
+            width: 100%;
+            background-color: rgb(166, 166, 166);
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            padding: 20px;
+            cursor: pointer;
+            border-bottom: 2px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .top-header img {
+            max-height: 50px;
+            margin-right: 10px;
+        }
+
+        .main-layout {
+            display: flex;
+            flex: 1;
+            width: 100%;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #f5f5f5;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background-image: url("{{ url_for('static', filename='사이드바3.png') }}");
+            background-size: 17em;
+            background-repeat: no-repeat;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .sidebar-button {
+            width: 200px;
+            height: 120px;
+            border-radius: 15px;
+            background-color: transparent;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            padding: 0;
+        }
+
+        /* 버튼 이미지 스타일 */
+        .sidebar-button img {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.3s; /* 이미지의 투명도 전환 효과 */
+        }
+
+        /* 호버 시 이미지 오버레이 효과 */
+        .sidebar-button:hover img {
+            opacity: 0.5; /* 호버 시 이미지 배경만 투명하게 변경 */
+        }
+
+        /* 버튼 안의 라벨 스타일 */
+        .button-label {
+            position: absolute;
+            color: #fff; /* 텍스트 색상 (흰색) */
+            font-size: 1.2em;
+            text-align: center;
+            opacity: 0; /* 기본적으로는 보이지 않음 */
+            transition: opacity 0.3s; /* 서서히 나타나는 효과 */
+        }
+
+        /* 버튼에 마우스를 올렸을 때 라벨 보이기 */
+        .sidebar-button:hover .button-label {
+            opacity: 1; /* 호버 시 텍스트가 보이도록 설정 */
+        }
+
+
+        .quiz-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0); /* 배경 투명도 추가 */
+        }
+
+        .quiz-button-start {
+            padding: 15px 30px;
+            font-size: 2.0em;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+            transition: background-color 0.3s;
+            margin-top: 450px;
+            margin-right: 150px;
+        }
+
+        .quiz-button-start:hover {
+            background-color: #333;
+        }
+
+        .quiz-button {
+            padding: 15px 30px;
+            font-size: 2.0em;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        .quiz-button:hover {
+            background-color: #333;
+        }
+
+        /* 팝업 스타일 */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .popup {
+            
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 600px;
+            background-color: #ffffff;
+            border: 2px solid #000;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            overflow: hidden;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'DOS';
+        }
+
+        .popup-body {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+            align-items: center;
+            justify-content: center;
+            font-family: 'DOS';
+        }
+
+        .quiz-question {
+            font-size: 1.2em; /* 글자 크기 약간 줄임 */
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .popup-footer {
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: center;
+        }
+
+        .popup-footer button {
+            padding: 10px;
+            border-radius: 25px;
+            background-color: #0084ff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .popup-footer button:hover {
+            background-color: #005bb5;
+        }
+
+        /* 결과 팝업 스타일 */
+        .popup.results-popup {
+            height: 800px; /* 세로 길이 증가 */
+        }
+    </style>
+</head>
+<body>
+    <div class="top-header" onclick="location.href='/'">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="술멍 로고">
+    </div>
+
+    <div class="main-layout">
+        <div class="sidebar">
+            <a href="{{ url_for('main_page') }}">
+                <div class="sidebar-button">
+                    <img src="{{ url_for('static', filename='test1.png') }}" alt="전통주 추천">
+                    <span class="button-label">감정따라 <br>술따라</span>
+                </div>
+              
+            </a>
+        
+            <a href="{{ url_for('recipe') }}">
+                <div class="sidebar-button">
+                    <img src="{{ url_for('static', filename='test2.png') }}" alt="칵테일 레시피 추천">
+                    <span class="button-label">전통주를 <br>부탁해</span>
+                </div>
+               
+            </a>
+        
+            <a href="{{ url_for('quiz') }}">
+                <div class="sidebar-button">
+                    <img src="{{ url_for('static', filename='test3.png') }}" alt="전통주 퀴즈">
+                    <span class="button-label">O/X로 배우는<br>전통주</span>
+                </div>
+                
+            </a>
+        
+            <a href="{{ url_for('bar') }}">
+                <div class="sidebar-button">
+                    <img src="{{ url_for('static', filename='test4.png') }}" alt="챗봇">
+                    <span class="button-label">로컬전통주<br>어디서 만나볼까</span>
+                </div>
+               
+            </a>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-buttons">
+                <button class="quiz-button-start" onclick="openPopup()">퀴즈 시작하기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 팝업창 -->
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
+    <div class="popup" id="popup">
+        <div class="popup-body" id="popupBody">
+            <div class="quiz-question">퀴즈를 시작하려면 버튼을 눌러주세요.</div>
+            <div class="quiz-buttons">
+                <button class="quiz-button" onclick="initializeQuiz()">퀴즈 진행하기</button>
+            </div>
+        </div>
+        <div class="popup-footer">
+            <button onclick="closePopup()">닫기</button>
+        </div>
+    </div>
+
+    <script>
+        const totalQuestions = 5;
+
+        function openPopup() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('popup').style.display = 'flex';
+        }
+
+        function closePopup() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        // 퀴즈 초기화
+        async function initializeQuiz() {
+            try {
+                const response = await fetch("/quiz/initialize_quiz", { method: "GET" });
+                const data = await response.json();
+
+                const popupBody = document.getElementById("popupBody");
+                popupBody.innerHTML = `
+                    <div class="quiz-question">${data.message}</div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button" onclick="getQuestion()">퀴즈 진행하기</button>
+                    </div>`;
+            } catch (error) {
+                console.error("Error initializing quiz:", error);
+            }
+        }
+
+        // 질문 가져오기
+        async function getQuestion() {
+            try {
+                const response = await fetch("/quiz/get_question", { method: "GET" });
+                const data = await response.json();
+
+                if (data.error) {
+                    displayResults();
+                    return;
+                }
+
+                const popupBody = document.getElementById("popupBody");
+                popupBody.innerHTML = `
+                    <div class="quiz-question">${data.question}</div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button" onclick="checkAnswer('O')">O</button>
+                        <button class="quiz-button" onclick="checkAnswer('X')">X</button>
+                    </div>`;
+            } catch (error) {
+                console.error("Error getting question:", error);
+            }
+        }
+
+        // 정답 확인
+        async function checkAnswer(answer) {
+            try {
+                const response = await fetch("/quiz/check_answer", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ answer })
+                });
+
+                const data = await response.json();
+                const popupBody = document.getElementById("popupBody");
+
+                if (data.current_question >= totalQuestions) {
+                    popupBody.innerHTML = `
+                        <div class="quiz-question">${data.result}</div>
+                        <p>${data.feedback}</p>
+                        <p>${data.commentary}</p>
+                        <div class="quiz-buttons">
+                            <button class="quiz-button" onclick="displayResults()">점수 확인하기</button>
+                        </div>`;
+                    return;
+                }
+
+                popupBody.innerHTML = `
+                    <div class="quiz-question">${data.result}</div>
+                    <p>${data.feedback}</p>
+                    <p>${data.commentary}</p>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button" onclick="getQuestion()">다음 문제</button>
+                    </div>`;
+            } catch (error) {
+                console.error("Error checking answer:", error);
+            }
+        }
+
+        // 결과 표시
+        async function displayResults() {
+            try {
+                const response = await fetch("/quiz/quiz_result", { method: "GET" });
+                const data = await response.json();
+
+                const historyHtml = data.history.map((item, index) => `
+                    <div class="quiz-results">
+                        <p><strong>문제 ${index + 1}:</strong> ${item.question}</p>
+                        <p>사용자 답변: ${item.user_answer}</p>
+                        <p>정답: ${item.correct_answer}</p>
+                        <p class="${item.correct ? 'correct' : 'incorrect'}">
+                            ${item.correct ? "정답 🎉" : "오답 ❌"}
+                        </p>
+                    </div>`).join("");
+
+                const popup = document.getElementById("popup");
+                popup.classList.add("results-popup");
+                const popupBody = document.getElementById("popupBody");
+                popupBody.innerHTML = `
+                    <div class="quiz-question">퀴즈 완료!</div>
+                    <div class="quiz-feedback" style="color: red; font-weight: bold; font-size: 1.8em;">최종 점수: ${data.score}점</div>
+
+                    <div>${historyHtml}</div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button" onclick="initializeQuiz()">다시 시작하기</button>
+                    </div>`;
+            } catch (error) {
+                console.error("Error displaying results:", error);
+            }
+        }
+    </script>
+</body>
+</html>

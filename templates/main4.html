@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>술멍 체험해보기</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        @font-face{
+            font-family: 'SUITE-BOLD';
+            src: url('/static/fonts/chatfonts/SUITE-Bold.ttf');
+        }
+        @font-face{
+            font-family: 'NanumGothicBold';
+            src: url('/static/fonts/chatfonts/NanumGothicExtraBold.otfs');
+        }
+        @font-face{
+            font-family: 'btn';
+            src: url('/static/fonts/ChungjuKimSaeng.ttf');
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            background-color: #ffffff;
+        }
+
+        /* 상단 헤더 스타일 */
+        .top-header {
+            width: 100%;
+            background: linear-gradient(to bottom, rgb(204, 49, 40), rgb(255, 137, 113));
+            color: #181818;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            padding: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 메인 레이아웃 스타일 */
+        .main-layout {
+            display: flex;
+            flex: 1;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #f5f5f5;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background-image: url("{{ url_for('static', filename='사이드바4.png') }}");
+            background-size: 17em;
+            background-repeat: no-repeat;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .sidebar-button {
+            width: 200px;
+            height: 120px;
+            border-radius: 15px;
+            background-color: transparent;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            padding: 0;
+        }
+
+        /* 버튼 이미지 스타일 */
+        .sidebar-button img {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.3s; /* 이미지의 투명도 전환 효과 */
+        }
+
+        /* 호버 시 이미지 오버레이 효과 */
+        .sidebar-button:hover img {
+            opacity: 0.5; /* 호버 시 이미지 배경만 투명하게 변경 */
+        }
+
+        /* 버튼 안의 라벨 스타일 */
+        .button-label {
+            position: absolute;
+            color: #fff; /* 텍스트 색상 (흰색) */
+            font-size: 1.2em;
+            text-align: center;
+            opacity: 0; /* 기본적으로는 보이지 않음 */
+            transition: opacity 0.3s; /* 서서히 나타나는 효과 */
+        }
+
+        /* 버튼에 마우스를 올렸을 때 라벨 보이기 */
+        .sidebar-button:hover .button-label {
+            opacity: 1; /* 호버 시 텍스트가 보이도록 설정 */
+        }
+
+
+        .chat-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: row;
+            background-color: #ffffff;
+            border-left: 2px solid #e0e0e0;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 20px;
+            background: url("{{ url_for('static', filename='챗봇1.png') }}") no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'NanumGothicBold';
+        }
+
+        .popup-button {
+            width: 300px;
+            height: 400px;
+            border-radius: 15px;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            font-size: 2em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            text-align: center;
+            cursor: pointer;
+            margin: 20px;
+            font-family: 'btn';
+        }
+
+        .flower {
+            background-image: url("{{ url_for('static', filename='bar_images/꽃술래_주점이미지(1).png') }}");
+        }
+
+        .korea {
+            background-image: url("{{ url_for('static', filename='bar_images/한식주점코리아.png') }}");
+        }
+
+        .midnight {
+            background-image: url("{{ url_for('static', filename='bar_images/심야.png') }}");
+        }
+
+        .overlay-text {
+            position: absolute;
+            bottom: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .popup-button {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #000;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: #000;
+            text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .popup-button:hover {
+            transform: scale(1.05);
+        }
+
+        .popup-button .overlay-text {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 5px;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 800px;
+            background-color: #ffffff;
+            border: 2px solid #000;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            overflow: hidden;
+            flex-direction: column;
+            font-family: 'SUITE-Bold';
+        }
+
+        .popup-header {
+            background-color: #000;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        .popup-body {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            background-color: #f5f5f5;
+        }
+
+        .popup-footer {
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            display: flex;
+        }
+
+        .popup-footer input {
+            flex-grow: 1;
+            padding: 10px;
+            border-radius: 25px;
+            border: 1px solid #ddd;
+            margin-right: 10px;
+        }
+
+        .popup-footer button {
+            padding: 10px;
+            border-radius: 25px;
+            background-color: #0084ff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .popup-footer button:hover {
+            background-color: #005bb5;
+        }
+
+        .profile-pic {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin: 0 10px;
+        }
+        .loading-dots {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 20px;
+        margin-top: 10px; /* 점들이 말풍선 중앙에 배치되도록 */
+    }
+
+    .loading-dots span {
+        display: block;
+        width: 8px;
+        height: 8px;
+        margin: 0 3px;
+        background-color: #000; /* 점 색상 (검정색) */
+        border-radius: 50%;
+        animation: bounce 1.4s infinite ease-in-out both;
+    }
+
+    .loading-dots span:nth-child(1) {
+        animation-delay: -0.32s;
+    }
+
+    .loading-dots span:nth-child(2) {
+        animation-delay: -0.16s;
+    }
+
+    @keyframes bounce {
+        0%, 80%, 100% {
+            transform: scale(0);
+        }
+        40% {
+            transform: scale(1);
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- 상단 헤더 -->
+    <div class="top-header" style="border-bottom: 2px solid #000;" onclick="location.href='/'">
+        <img src="{{ url_for('static', filename='logo반전.png') }}" alt="술멍 로고" style="max-height: 50px;">
+    </div>
+
+    <!-- 메인 레이아웃 -->
+    <div class="main-layout">
+        <!-- 사이드바 -->
+        <div class="sidebar">
+            <a href="{{ url_for('main_page') }}">
+                <div class="sidebar-button">
+                    <img src="{{ url_for('static', filename='test1.png') }}" alt="전통주 추천">
+                    <span class="button-label">감정따라 <br>술따라</span>
+                </div>
+              
+            </a>
+        
+            <a href="{{ url_for('recipe') }}">
+                <div class="sidebar-button">
+                    <img src="{{ url_for('static', filename='test2.png') }}" alt="칵테일 레시피 추천">
+                    <span class="button-label">전통주를 <br>부탁해</span>
+                </div>
+               
+            </a>
+        
+            <a href="{{ url_for('quiz') }}">
+                <div class="sidebar-button">
+                    <img src="{{ url_for('static', filename='test3.png') }}" alt="전통주 퀴즈">
+                    <span class="button-label">O/X로 배우는<br>전통주</span>
+                </div>
+                
+            </a>
+        
+            <a href="{{ url_for('bar') }}">
+                <div class="sidebar-button">
+                    <img src="{{ url_for('static', filename='test4.png') }}" alt="챗봇">
+                    <span class="button-label">로컬전통주<br>어디서 만나볼까</span>
+                </div>
+               
+            </a>
+        </div>
+
+        <!-- 채팅창 컨테이너 -->
+        <div class="chat-container">
+            <div class="popup-button flower" onclick="openPopup('꽃술래')">
+                <div class="overlay-text">꽃술래</div>
+            </div>
+            <div class="popup-button korea" onclick="openPopup('한식주점 코리아')">
+                <div class="overlay-text">한식주점 코리아</div>
+            </div>
+            <div class="popup-button midnight" onclick="openPopup('심야')">
+                <div class="overlay-text">심야</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 팝업창 -->
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
+    <div class="popup" id="popup">
+        <div class="popup-header">술멍 챗봇</div>
+        <div class="popup-body" id="popupBody">
+        </div>
+        <div class="popup-footer">
+            <input type="text" id="popupInput" placeholder="질문을 입력하세요">
+            <button onclick="sendPopupMessage()">전송</button>
+        </div>
+    </div>
+
+    <script>
+        let currentBar = null;
+
+        function openPopup(barName) {
+            currentBar = barName;
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('popup').style.display = 'flex';
+            document.getElementById('popupBody').innerHTML = `
+                <div class="message-container system">
+                    <img src="{{ url_for('static', filename='ChatAI.png') }}" alt="AI 프로필 사진" class="profile-pic">
+                    <div class="message system">'${barName}'에 대해 무엇이 궁금하신가요?</div>
+                </div>`;
+        }
+
+        function closePopup() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
+            currentBar = null;
+        }
+
+        async function sendPopupMessage() {
+            const inputField = document.getElementById('popupInput');
+            const messageText = inputField.value.trim();
+
+            if (!messageText) {
+                alert("질문을 입력해주세요.");
+                return;
+            }
+
+            // 사용자 메시지 출력
+            const popupBody = document.getElementById('popupBody');
+            popupBody.innerHTML += `
+                <div class="message-container user" style="flex-direction: row-reverse; text-align: right;">
+                    <img src="{{ url_for('static', filename='ChatME.png') }}" alt="사용자 프로필 사진" class="profile-pic">
+                    <div class="message user">${messageText}</div>
+                </div>`;
+
+                
+
+            // AI 생각 중 메시지 추가
+            const thinkingMessage = document.createElement('div');
+                thinkingMessage.classList.add('message-container', 'system');
+                thinkingMessage.innerHTML = `
+                    <img src="{{ url_for('static', filename='ChatAI.png') }}" alt="AI 프로필 사진" class="profile-pic">
+                    <div class="message system">
+                        <div class="loading-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                `;
+    popupBody.appendChild(thinkingMessage);
+    popupBody.scrollTop = popupBody.scrollHeight;
+            try {
+                // 서버로부터 응답 요청
+                const response = await fetch("/bar/chat", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        message: messageText,
+                        current_bar: currentBar
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('서버 오류가 발생했습니다.');
+                }
+
+                const result = await response.json();
+
+                if (result && result.response) {
+                    setTimeout(() => {
+                        thinkingMessage.querySelector('.message').innerHTML = result.response;
+                        popupBody.scrollTop = popupBody.scrollHeight;
+                    }, 2000);
+                } else {
+                    thinkingMessage.querySelector('.message').innerHTML = '오류가 발생했습니다. 다시 시도해주세요.';
+                    popupBody.scrollTop = popupBody.scrollHeight;
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                thinkingMessage.querySelector('.message').innerHTML = '서버와의 통신 중 오류가 발생했습니다. 다시 시도해주세요.';
+                popupBody.scrollTop = popupBody.scrollHeight;
+            }
+
+            // 입력 필드 초기화 및 스크롤 이동
+            inputField.value = '';
+            popupBody.scrollTop = popupBody.scrollHeight;
+        }
+
+        document.getElementById('popupInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendPopupMessage();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>술멍 체험해보기</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+         @font-face{
+            font-family: 'btn';
+            src: url('/static/fonts/ChungjuKimSaeng.ttf');
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            background-color: #ffffff;
+        }
+
+        /* 상단 헤더 스타일 */
+        .top-header {
+            width: 100%;
+            background-color: #ffffff;
+            color: #181818;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            padding: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-image: url("{{ url_for('static', filename='메인.png') }}");
+            background-repeat: no-repeat;
+        }
+
+        /* 메인 레이아웃 스타일 */
+        .main-layout {
+            display: flex;
+            flex: 1;
+        }
+
+        /* 사이드바 수정: 둥근 버튼 스타일 */
+        .sidebar {
+            width: 250px;
+            background-color: #f5f5f5;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            align-items: center;
+            background-image: url("{{ url_for('static', filename='술잔.png') }}");
+            background-position: bottom;
+            background-size: 120%;
+            background-repeat: no-repeat;
+        }
+
+        .sidebar-button {
+            width: 200px;
+            height: 120px;
+            border-radius: 15px;
+            background-color: transparent;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            padding: 0;
+        }
+
+        /* 버튼 이미지 스타일 */
+        .sidebar-button img {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.3s; /* 이미지의 투명도 전환 효과 */
+        }
+
+        /* 호버 시 이미지 오버레이 효과 */
+        .sidebar-button:hover img {
+            opacity: 0.5; /* 호버 시 이미지 배경만 투명하게 변경 */
+        }
+
+        /* 버튼 안의 라벨 스타일 */
+        .button-label {
+            position: absolute;
+            color: #fff; /* 텍스트 색상 (흰색) */
+            font-size: 1.2em;
+            text-align: center;
+            opacity: 0; /* 기본적으로는 보이지 않음 */
+            transition: opacity 0.3s; /* 서서히 나타나는 효과 */
+        }
+
+        /* 버튼에 마우스를 올렸을 때 라벨 보이기 */
+        .sidebar-button:hover .button-label {
+            opacity: 1; /* 호버 시 텍스트가 보이도록 설정 */
+        }
+
+
+        .chat-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+            border-left: 2px solid #e0e0e0;
+            justify-content: flex-start;
+            position: relative;
+        }
+
+        .chat-window {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: calc(100vh - 200px);
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+            background-image: url("{{ url_for('static', filename='사람.png') }}");
+            background-size: 35em; 
+            background-position:  right bottom; 
+            background-repeat: no-repeat; 
+            border-left: 2px solid #e0e0e0;
+            justify-content: flex-start;
+            font-family: 'btn';
+        }
+
+        .message-container {
+            display: flex;
+            align-items: flex-start;
+            margin: 10px 0;
+            max-width: 60%;
+        }
+        .message-container.user {
+            flex-direction: row-reverse;
+            align-self: flex-end;
+        }
+        .message {
+            padding: 15px;
+            border-radius: 20px;
+            line-height: 1.5;
+            font-size: 1.1em;
+            background-color: #e6e6e6;
+        }
+        .message.user {
+            background-color: #000;
+            color: #fff;
+            border-bottom-right-radius: 0;
+        }
+        .message.system {
+            border-bottom-left-radius: 0;
+        }
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 0 10px;
+        }
+
+        .input-container {
+            display: flex;
+            padding: 15px;
+            background-color: #ffffff;
+            border-top: 1px solid #ddd;
+        }
+        .input-container input {
+            flex-grow: 1;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 1em;
+            margin-right: 15px;
+        }
+        .input-container button {
+            padding: 15px 25px;
+            border: none;
+            background-color: #000;
+            color: #fff;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .input-container button:hover {
+            background-color: #333;
+        }
+
+        .chat-image {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: auto;
+        }
+
+    /* 로딩 애니메이션을 위한 스타일 */
+    .loading-dots {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 20px;
+        margin-top: 10px; /* 점들이 말풍선 중앙에 배치되도록 */
+    }
+
+    .loading-dots span {
+        display: block;
+        width: 8px;
+        height: 8px;
+        margin: 0 3px;
+        background-color: #000; /* 점 색상 (검정색) */
+        border-radius: 50%;
+        animation: bounce 1.4s infinite ease-in-out both;
+    }
+
+    .loading-dots span:nth-child(1) {
+        animation-delay: -0.32s;
+    }
+
+    .loading-dots span:nth-child(2) {
+        animation-delay: -0.16s;
+    }
+
+    @keyframes bounce {
+        0%, 80%, 100% {
+            transform: scale(0);
+        }
+        40% {
+            transform: scale(1);
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- 상단 헤더 -->
+    <div class="top-header" style="border-bottom: 2px solid #000;" onclick="location.href='/'">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="술멍 로고" style="max-height: 50px;">
+    </div>
+
+    <!-- 메인 레이아웃 -->
+    <div class="main-layout">
+        <!-- 사이드바 -->
+         
+        <div class="sidebar">
+            <a href="{{ url_for('main_page') }}">
+                <div class="sidebar-button">
+                    <img src="{{ url_for('static', filename='test1.png') }}" alt="전통주 추천">
+                    <span class="button-label">감정따라 <br>술따라</span>
+                </div>
+              
+            </a>
+        
+            <a href="{{ url_for('recipe') }}">
+                <div class="sidebar-button">
+                    <img src="{{ url_for('static', filename='test2.png') }}" alt="칵테일 레시피 추천">
+                    <span class="button-label">전통주를 <br>부탁해</span>
+                </div>
+               
+            </a>
+        
+            <a href="{{ url_for('quiz') }}">
+                <div class="sidebar-button">
+                    <img src="{{ url_for('static', filename='test3.png') }}" alt="전통주 퀴즈">
+                    <span class="button-label">O/X로 배우는<br>전통주</span>
+                </div>
+                
+            </a>
+        
+            <a href="{{ url_for('bar') }}">
+                <div class="sidebar-button">
+                    <img src="{{ url_for('static', filename='test4.png') }}" alt="챗봇">
+                    <span class="button-label">로컬전통주<br>어디서 만나볼까</span>
+                </div>
+               
+            </a>
+        </div>
+
+        <!-- 채팅창 컨테이너 -->
+        <div class="chat-container">
+            <div class="chat-window" id="chat1">
+                <div class="message-container system">
+                    <img src="{{ url_for('static', filename='AI.png') }}" alt="AI 프로필 사진" class="profile-pic">
+                    <div class="message system">안녕하세요! 오늘의 기분은 어떤가요?</div>
+                </div>
+                <div class="message-container user">
+                    <img src="{{ url_for('static', filename='Me.png') }}" alt="사용자 프로필 사진" class="profile-pic">
+                    <div class="message user">(예시) 시험을 잘 봤어 기분이 좋아요.</div>
+                </div>
+            </div>
+            <div class="input-container">
+                <input type="text" id="chatInput" placeholder="대화를 시작해보세요">
+                <button onclick="sendMessage()">전송</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentEmotion = null;
+        let awaitingRecommendation = false;
+    
+        async function sendMessage() {
+            const inputField = document.getElementById('chatInput');
+            const messageText = inputField.value.trim();
+    
+            if (!messageText) {
+                alert("Please enter some text.");
+                return;
+            }
+    
+            // 사용자 메시지 출력
+            const chatWindow = document.getElementById('chat1');
+            chatWindow.innerHTML += `
+                <div class="message-container user">
+                    <img src="{{ url_for('static', filename='Me.png') }}" alt="사용자 프로필 사진" class="profile-pic">
+                    <div class="message user">${messageText}</div>
+                </div>`;
+    
+            // AI 생각 중 메시지 추가 (여기서 로딩 애니메이션 추가)
+            const thinkingMessage = document.createElement('div');
+            thinkingMessage.classList.add('message-container', 'system');
+            thinkingMessage.innerHTML = `
+                <img src="{{ url_for('static', filename='AI.png') }}" alt="AI 프로필 사진" class="profile-pic">
+                <div class="message system">
+                    <div class="loading-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            `;
+            chatWindow.appendChild(thinkingMessage);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+    
+            try {
+                if (!currentEmotion && !awaitingRecommendation) {
+                    // 감정 분석 및 후속 응답 요청
+                    const response = await fetch("/emotion/analyze", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ user_input: messageText })
+                    });
+    
+                    const result = await response.json();
+    
+                    if (result && result.emotion) {
+                        currentEmotion = result.emotion;
+    
+                        // 감정에 기반한 응답 생성 요청
+                        const followUpResponse = await fetch("/emotion/respond", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({ emotion: currentEmotion, user_input: messageText })
+                        });
+    
+                        const followUpResult = await followUpResponse.json();
+    
+                        if (followUpResult && followUpResult.response) {
+                            setTimeout(() => {
+                                thinkingMessage.querySelector('.message').innerHTML = followUpResult.response;
+                                chatWindow.scrollTop = chatWindow.scrollHeight;
+                            }, 2000);
+    
+                            // 주류 취향 지침 추가
+                            setTimeout(() => {
+                                chatWindow.innerHTML += `
+                                    <div class="message-container system">
+                                        <img src="{{ url_for('static', filename='AI.png') }}" alt="AI 프로필 사진" class="profile-pic">
+                                        <div class="message system">주류 추천을 위해 선호도를 알려주세요. 예를 들어, 단맛이 좋아, 쓰고 상큼한 게 좋아, 이러는 식으로 답변해주시면 된다요!</div>
+                                    </div>`;
+                                chatWindow.scrollTop = chatWindow.scrollHeight;
+                            }, 2000);
+    
+                            awaitingRecommendation = true; // 주류 추천 요청 대기 상태로 설정
+                        }
+                    } else if (result.error) {
+                        thinkingMessage.querySelector('.message').innerHTML = result.error;
+                        chatWindow.scrollTop = chatWindow.scrollHeight;
+                    }
+                } else if (awaitingRecommendation) {
+                    // 주류 추천 요청
+                    const response = await fetch("/recommend/recommend", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            emotion: currentEmotion,
+                            flavor_input: messageText
+                        })
+                    });
+    
+                    const data = await response.json();
+    
+                    if (data && data.text) {
+                        setTimeout(() => {
+                            thinkingMessage.querySelector('.message').innerHTML = data.text.replace(/\n/g, '<br>');
+                            chatWindow.scrollTop = chatWindow.scrollHeight;
+    
+                            // 추천 이미지 출력
+                            if (data.image_url) {
+                                const imageSrc = data.image_url;
+                                chatWindow.innerHTML += `
+                                    <div class="message-container system">
+                                        <img src="{{ url_for('static', filename='AI.png') }}" alt="AI 프로필 사진" class="profile-pic">
+                                        <div class="message system">
+                                            <img src="${imageSrc}" alt="추천 주류 이미지" class="recommendation-image" style="margin-top: 10px; width: 400px; height: auto; object-fit: cover; border-radius: 10px;">
+                                        </div>
+                                    </div>`;
+                            }
+    
+                            currentEmotion = null; // 상태 초기화
+                            awaitingRecommendation = false; // 추천 완료 후 대기 상태 해제
+                            chatWindow.scrollTop = chatWindow.scrollHeight;
+                        }, 2000);
+                    } else if (data && data.error) {
+                        thinkingMessage.querySelector('.message').innerHTML = data.error;
+                        chatWindow.scrollTop = chatWindow.scrollHeight;
+                    } else {
+                        thinkingMessage.querySelector('.message').innerHTML = '페이지를 다시 한 번 시작해주세요.';
+                        chatWindow.scrollTop = chatWindow.scrollHeight;
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                thinkingMessage.querySelector('.message').innerHTML = '페이지를 다시 한 번 시작해주세요.';
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+            }
+    
+            // 입력 필드 초기화 및 스크롤 이동
+            inputField.value = '';
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+    
+        // Enter 키로 전송 가능하게 추가
+        document.getElementById('chatInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+    
+</body>
+</html>

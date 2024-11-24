@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>바텐더 비주얼 노벨</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        @font-face{
+            font-family: 'DungGeunMo';
+            src: url('/static/fonts/DungGeunMo.ttf');
+        }
+        @font-face{
+            font-family: 'PFstardust';
+            src: url('/static/fonts/barfonts/PFstardust.ttf');
+        }
+        @font-face{
+            font-family: 'DOSMyungjo';
+            src: url('/static/fonts/barfonts/DOSMyungjo.ttf');
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            background: url("{{ url_for('static', filename='bartender.png') }}") no-repeat center center fixed;
+            background-position: center;
+            background-size: contain;
+        }
+
+        .top-header {
+            width: 100%;
+            background-color: #ffffff;
+            color: #181818;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-bottom: 2px solid #000;
+            background-image: url("{{ url_for('static', filename='헤더2.png') }}");
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #f5f5f5;
+            color: #000;
+            display: flex;
+            height: 1500px;
+            flex-direction: column;
+            padding: 20px;
+            background-image: url("{{ url_for('static', filename='사이드바2.png') }}");
+            background-size: 17em;
+            background-repeat: no-repeat;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .sidebar-button {
+            width: 200px;
+            height: 120px;
+            border-radius: 15px;
+            background-color: transparent;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            padding: 0;
+        }
+
+        /* 버튼 이미지 스타일 */
+        .sidebar-button img {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.3s; /* 이미지의 투명도 전환 효과 */
+        }
+
+        /* 호버 시 이미지 오버레이 효과 */
+        .sidebar-button:hover img {
+            opacity: 0.5; /* 호버 시 이미지 배경만 투명하게 변경 */
+        }
+
+        /* 버튼 안의 라벨 스타일 */
+        .button-label {
+            position: absolute;
+            color: #fff; /* 텍스트 색상 (흰색) */
+            font-size: 1.2em;
+            text-align: center;
+            opacity: 0; /* 기본적으로는 보이지 않음 */
+            transition: opacity 0.3s; /* 서서히 나타나는 효과 */
+        }
+
+        /* 버튼에 마우스를 올렸을 때 라벨 보이기 */
+        .sidebar-button:hover .button-label {
+            opacity: 1; /* 호버 시 텍스트가 보이도록 설정 */
+        }
+
+                .dialogue-container {
+            position: fixed;
+            bottom: 20px;
+            left: 270px;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            font-size: 1.8em;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            height: 250px;
+        }
+
+        .dialogue-text {
+            margin-bottom: 20px;
+            font-family: 'PFstardust', sans-serif;
+            font-size: 1.3em;
+        }
+
+        .options-container {
+            position: fixed;
+            bottom: 300px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+
+        .option-button {
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: 'PFstardust', sans-serif;
+            font-weight: 200;
+            font-size: 1.3em;
+        }
+
+        .option-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .input-container input {
+            flex-grow: 1;
+            padding: 10px;
+            border-radius: 15px;
+            border: none;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 1.2em;
+            margin-right: 10px;
+        }
+
+        .input-container button {
+            padding: 10px 20px;
+            border-radius: 15px;
+            border: none;
+            background: #000000a1;
+            color: #fff;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .input-container button:hover {
+            background-color: #4949498a;
+        }
+
+        .popup-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            border-radius: 15px;
+            max-width: 600px;
+            max-height: 150%;
+            overflow-y: auto;
+            text-align: center;
+        }
+        
+
+        .popup-container .message {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .popup-container .button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .popup-container .button:hover {
+            background-color: #555;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="top-header" onclick="location.href='/'">
+        <img src="{{ url_for('static', filename='logo반전.png') }}" alt="술멍 로고" style="max-height: 50px;">
+    </div>
+
+    <div class="sidebar">
+        <a href="{{ url_for('main_page') }}">
+            <div class="sidebar-button">
+                <img src="{{ url_for('static', filename='test1.png') }}" alt="전통주 추천">
+                <span class="button-label">감정따라 <br>술따라</span>
+            </div>
+          
+        </a>
+    
+        <a href="{{ url_for('recipe') }}">
+            <div class="sidebar-button">
+                <img src="{{ url_for('static', filename='test2.png') }}" alt="칵테일 레시피 추천">
+                <span class="button-label">전통주를 <br>부탁해</span>
+            </div>
+           
+        </a>
+    
+        <a href="{{ url_for('quiz') }}">
+            <div class="sidebar-button">
+                <img src="{{ url_for('static', filename='test3.png') }}" alt="전통주 퀴즈">
+                <span class="button-label">O/X로 배우는<br>전통주</span>
+            </div>
+            
+        </a>
+    
+        <a href="{{ url_for('bar') }}">
+            <div class="sidebar-button">
+                <img src="{{ url_for('static', filename='test4.png') }}" alt="챗봇">
+                <span class="button-label">로컬전통주<br>어디서 만나볼까</span>
+            </div>
+           
+        </a>
+    </div>
+
+    <div class="dialogue-container" id="dialogueContainer">
+        <div class="dialogue-text" id="dialogueText">안녕하세요! 저는 바텐더입니다. 오늘 어떤 이야기를 나누고 싶으신가요?</div>
+    </div>
+    <div class="options-container" id="options">
+        <button class="option-button" onclick="selectOption('추천')">레시피 추천받기</button>
+        <button class="option-button" onclick="selectOption('잡담')">그냥 잡담하고 싶어요</button>
+    </div>
+
+    <script>
+        const dialogueText = document.getElementById('dialogueText');
+        const options = document.getElementById('options');
+
+        function typeDialogue(text, callback) {
+            let i = 0;
+            dialogueText.innerHTML = '';
+            const typingInterval = setInterval(() => {
+                if (i < text.length) {
+                    dialogueText.innerHTML += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typingInterval);
+                    if (callback) {
+                        callback();
+                    }
+                }
+            }, 50);
+        }
+
+        function selectOption(choice) {
+            options.innerHTML = '';
+
+            if (choice === '추천') {
+                typeDialogue("먼저 원하시는 술을 선택해주세요: 막걸리, 청주, 소주 중에서 하나를 골라주세요.", () => {
+                    options.innerHTML = `
+                        <button class="option-button" onclick="selectBase('막걸리')">막걸리</button>
+                        <button class="option-button" onclick="selectBase('청주')">청주</button>
+                        <button class="option-button" onclick="selectBase('소주')">소주</button>
+                    `;
+                });
+            } else if (choice === '잡담') {
+                typeDialogue("요즘 어떻게 지내세요? 저는 여기에서 손님들과 이야기 나누는 게 참 좋아요.", () => {
+                    options.innerHTML = `
+                        <button class="option-button" onclick="selectOption('좋아요')">좋아요! 저도 얘기하는 거 좋아해요</button>
+                        <button class="option-button" onclick="selectOption('별로에요')">별로에요, 그냥 조용히 있고 싶어요</button>
+                    `;
+                });
+            } else if (choice === '좋아요') {
+                typeDialogue("그렇군요! 많은 사람들과 이야기 나누는 것은 언제나 즐거운 일이에요.", () => {
+                    options.innerHTML = `<button class="option-button" onclick="selectOption('끝내기')">대화 끝내기</button>`;
+                });
+            } else if (choice === '별로에요') {
+                typeDialogue("그렇다면 조용히 시간을 보내시는 것도 좋죠. 언제든 편하게 말씀해 주세요.", () => {
+                    options.innerHTML = `<button class="option-button" onclick="selectOption('끝내기')">대화 끝내기</button>`;
+                });
+            } else if (choice === '끝내기') {
+                typeDialogue("오늘 대화 즐거웠습니다. 언제든 다시 찾아주세요!", () => {
+                    options.innerHTML = '';
+                });
+            }
+        }
+
+        function selectBase(base) {
+            typeDialogue(`선택하신 술은 ${base}입니다. 도수를 입력해주세요.`, () => {
+                options.innerHTML = `
+                    <div class="input-container">
+                        <input type="number" id="user_abv" placeholder="도수 (숫자만 입력)" required>
+                        <button onclick="handleABV('${base}')">다음</button>
+                    </div>
+                `;
+            });
+        }
+
+        function handleABV(base) {
+            const user_abv = document.getElementById('user_abv').value;
+            if (user_abv) {
+                selectABV(base, user_abv);
+            } else {
+                alert("도수를 입력해주세요.");
+            }
+        }
+
+        function selectABV(base, abv) {
+            typeDialogue("집에 있는 과일을 입력해주세요. (예: 사과, 바나나)", () => {
+                options.innerHTML = `
+                    <div class="input-container">
+                        <input type="text" id="user_fruits" placeholder="과일 종류" required>
+                        <button onclick="handleFruits('${base}', '${abv}')">다음</button>
+                    </div>
+                `;
+            });
+        }
+
+        function handleFruits(base, abv) {
+            const user_fruits = document.getElementById('user_fruits').value;
+            if (user_fruits) {
+                selectFruits(base, abv, user_fruits);
+            } else {
+                alert("과일 종류를 입력해주세요.");
+            }
+        }
+
+        function selectFruits(base, abv, fruits) {
+            typeDialogue("냉장고에 있는 음료를 입력해주세요. (예: 콜라, 사이다)", () => {
+                options.innerHTML = `
+                    <div class="input-container">
+                        <input type="text" id="user_drinks" placeholder="음료 종류" required>
+                        <button onclick="handleDrinks('${base}', '${abv}', '${fruits}')">다음</button>
+                    </div>
+                `;
+            });
+        }
+
+        function handleDrinks(base, abv, fruits) {
+            const user_drinks = document.getElementById('user_drinks').value;
+            if (user_drinks) {
+                selectFinal(base, abv, fruits, user_drinks);
+            } else {
+                alert("음료 종류를 입력해주세요.");
+            }
+        }
+
+        function selectFinal(base, abv, fruits, drinks) {
+            typeDialogue("원하시는 도수를 입력해주세요", () => {
+                options.innerHTML = `
+                    <div class="input-container">
+                        <input type="number" id="result_abv" placeholder="원하는 도수" required>
+                        <button class="option-button" id="recommendButton" onclick="handleFinal('${base}', '${abv}', '${fruits}', '${drinks}')">레시피 추천 받기</button>
+                    </div>
+                `;
+            });
+        }
+
+        function handleFinal(base, abv, fruits, drinks) {
+            const result_abv = document.getElementById('result_abv').value;
+            if (result_abv) {
+                // 로딩 팝업을 먼저 띄움
+                openLoadingPopup();
+
+                // 서버에 요청 보내기
+                fetchRecipe(base, abv, fruits, drinks, result_abv);
+            } else {
+                alert("원하시는 도수를 입력해주세요.");
+            }
+        }
+
+        async function fetchRecipe(base, abv, fruits, drinks, final) {
+            try {
+                const response = await fetch('/cocktail/recommend_cocktail', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        user_base: base,
+                        user_abv: abv,
+                        user_fruits: fruits,
+                        user_drinks: drinks,
+                        result_abv: final
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    updatePopupContent(data.response);
+                } else {
+                    updatePopupContent("레시피 추천 중 오류가 발생했습니다. 다시 시도해 주세요.");
+                }
+            } catch (error) {
+                console.error('오류:', error);
+                updatePopupContent("네트워크 오류가 발생했습니다. 다시 시도해 주세요.");
+            }
+        }
+
+        function openLoadingPopup() {
+            const popupContainer = document.createElement('div');
+            popupContainer.className = 'popup-container';
+            popupContainer.style.textAlign = 'center';
+            popupContainer.innerHTML = `
+                <p>로딩 중입니다... 잠시만 기다려 주세요.</p>
+            `;
+
+            document.body.appendChild(popupContainer);
+        }
+
+        function updatePopupContent(content) {
+            const popupContainer = document.querySelector('.popup-container');
+            if (popupContainer) {
+                popupContainer.innerHTML = `<p style="white-space: pre-wrap;">${content}</p>`;
+                const closeButton = document.createElement('button');
+                closeButton.textContent = '닫기';
+                closeButton.className = 'button';
+                closeButton.addEventListener('click', function () {
+                    document.body.removeChild(popupContainer);
+                });
+                popupContainer.appendChild(closeButton);
+            }
+        }
+    </script>
+    
+</body>
+</html>
