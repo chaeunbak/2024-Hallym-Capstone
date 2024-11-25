@@ -31,7 +31,7 @@ AI 모델: OpenAI GPT (LLM 기반 대화 설계)
 
 ### 저장소 클론
 ```bash
-git clone https://github.com/your-repository-url
+git clone https://github.com/chaeunbak/2024-Hallym-Capstone/tree/main
 cd your-repository
 ```
 
@@ -53,13 +53,13 @@ cd your-repository
 ## 🖼 프로젝트 화면
 
 ### 메인 화면
-![메인 화면 이미지 추가](static\images\main_image.png)
+![메인 화면 이미지 추가](https://github.com/chaeunbak/2024-Hallym-Capstone/blob/main/static/images/main_image.png)
 
 ### 감정 따라 술 따라 기능
-![감정 따라 술 따라 기능 이미지 추가](static\images\first_program_image.png)
+![감정 따라 술 따라 기능 이미지 추가](https://github.com/chaeunbak/2024-Hallym-Capstone/blob/main/static/images/first_program_image.png)
 
 ### 전통주를 부탁해 기능
-![전통주를 부탁해 기능 이미지 추가](static\images\second_program_image.png)
+![전통주를 부탁해 기능 이미지 추가](https://github.com/chaeunbak/2024-Hallym-Capstone/blob/main/static/images/second_program_image.png)
 
 ---
 
