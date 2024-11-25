@@ -1,0 +1,199 @@
+[
+    {
+        "name": "하얀연꽃 백련생막걸리",
+        "type": "Makgeolli",
+        "alcohol_content": 7.0,
+        "region": "충남 당진시",
+        "volume": "375ml",
+        "flavor_profile": {
+            "sweet": 0,
+            "sour": 0,
+            "bitter": 0,
+            "flavor_description": "은은한 단맛과 상쾌한 탄산감이 잘 어우러져 입안을 산뜻하게 감쌉니다."
+        },
+        "recommendation_phrases": [
+            "부드러운 단맛이 은은하게 퍼지며 산뜻한 마무리를 제공합니다.",
+            "톡 쏘는 탄산감과 함께 깔끔한 단맛이 기분 좋게 다가옵니다.",
+            "가벼운 단맛과 상쾌한 탄산이 조화를 이루는 막걸리입니다."
+        ],
+        "pairing": ["스테이크", "바비큐"],
+        "occasion": "친구들과 가볍게 나누기 좋은 막걸리입니다.",
+        "image_url": "/static/images/M_1.jpeg"
+    },
+
+    {
+        "name": "대대포 막걸리",
+        "type": "Makgeolli",
+        "alcohol_content": 6.0,
+        "region": "전남 담양군 담양읍",
+        "volume": "750ml",
+        "flavor_profile": {
+            "sweet": 1,
+            "sour": 0,
+            "bitter": 0,
+            "flavor_description": "유기농 쌀과 벌꿀의 은은한 단맛이 깔끔하게 어우러진 맛이 특징입니다."
+        },
+        "recommendation_phrases": [
+            "유기농 쌀과 벌꿀의 자연스러운 단맛이 돋보이는 막걸리입니다.",
+            "달콤하면서도 깔끔한 맛이 일품으로, 청량감이 느껴지는 술입니다.",
+            "은은한 벌꿀 향과 가벼운 단맛으로 기분 좋게 즐길 수 있는 생막걸리입니다."
+        ],
+        "pairing": ["오이소박이", "오이 달걀 볶음", "소고기 오이 볶음"],
+        "occasion": "친구들과의 모임이나 가벼운 식사에 잘 어울리는 선택입니다.",
+        "image_url": "/static/images/M_2.jpeg"
+    },
+    {
+        "name": "봇뜰 막걸리 10도",
+        "type": "Makgeolli",
+        "alcohol_content": 10.0,
+        "region": "경기도 남양주시",
+        "volume": "750ml",
+        "flavor_profile": {
+            "sweet": 0,
+            "sour": 1,
+            "bitter": 0,
+            "flavor_description": "약간의 산미와 은은한 단맛이 어우러져 부드러운 맛을 선사합니다."
+        },
+        "recommendation_phrases": [
+            "산뜻한 산미와 가벼운 단맛이 매력적인 이양주입니다.",
+            "은은한 단맛과 산미가 어우러진 부드러운 맛을 즐길 수 있습니다.",
+            "부드러운 목 넘김과 산뜻한 풍미로 누구나 부담 없이 즐길 수 있습니다."
+        ],
+        "pairing": ["똠냥꿍", "토마토 해물 스파게티"],
+        "occasion": "여유로운 저녁 식사와 잘 어울리는 부드러운 막걸리입니다.",
+        "image_url": "/static/images/M_3.jpg"
+    },
+    {
+        "name": "심술6 막걸리",
+        "type": "Makgeolli",
+        "alcohol_content": 6.0,
+        "region": "경기도 포천시",
+        "volume": "500ml",
+        "flavor_profile": {
+            "sweet": 0,
+            "sour": 0,
+            "bitter": 1,
+            "flavor_description": "크리미한 목 넘김과 은은한 과일향이 조화를 이루며 탄산감이 상쾌함을 더해줍니다."
+        },
+        "recommendation_phrases": [
+            "크리미한 목 넘김과 과일향이 어우러져 산뜻한 맛을 느낄 수 있습니다.",
+            "적당한 탄산과 함께 은은하게 퍼지는 단맛과 산미의 조화가 일품입니다.",
+            "부드러운 텍스처와 과일향의 조화가 돋보이는 막걸리입니다."
+        ],
+        "pairing": ["육전", "동태전", "산적", "새우전"],
+        "occasion": "가벼운 전과 함께 즐기기에 완벽한 막걸리입니다.",
+        "image_url": "/static/images/M_4.png"
+    },
+    {
+        "name": "얼떨결에 퍼플",
+        "type": "Makgeolli",
+        "alcohol_content": 6.0,
+        "region": "강원도 영월군",
+        "volume": "935ml",
+        "flavor_profile": {
+            "sweet": 1,
+            "sour": 1,
+            "bitter": 0,
+            "flavor_description": "포도즙과 찰보리쌀의 조화로 달콤하면서도 산뜻한 맛이 돋보입니다."
+        },
+        "recommendation_phrases": [
+            "스파클링 와인 같은 상쾌함과 달콤한 풍미를 함께 즐길 수 있습니다.",
+            "달콤하면서도 산뜻한 산미가 조화를 이룬 이색적인 막걸리입니다.",
+            "묵직한 바디감과 새콤달콤한 포도 향이 매력적인 선택입니다."
+        ],
+        "pairing": ["매운탕", "피자", "치킨", "삼겹살"],
+        "occasion": "색다른 맛과 상쾌함을 원할 때 즐기기 좋은 막걸리입니다.",
+        "image_url": "/static/images/M_5.jpeg"
+    },
+    {
+        "name": "달막",
+        "type": "Makgeolli",
+        "alcohol_content": 13.0,
+        "region": "광주광역시 동구",
+        "volume": "500ml",
+        "flavor_profile": {
+            "sweet": 1,
+            "sour": 0,
+            "bitter": 0,
+            "flavor_description": "묵직한 바디감과 진한 과일 향이 어우러진 깊은 단맛이 특징입니다."
+        },
+        "recommendation_phrases": [
+            "탄산 없이 깊은 단맛을 살린 걸쭉한 막걸리입니다.",
+            "묵직한 바디감과 과일 향이 입안을 가득 채웁니다.",
+            "쌀 본연의 단맛을 진하게 느낄 수 있는 탁주입니다."
+        ],
+        "pairing": ["육전", "홍어 삼합", "닭백숙"],
+        "occasion": "풍부한 맛을 원할 때 진한 풍미를 즐기기에 좋은 선택입니다.",
+        "image_url": "/static/images/M_6.png"
+    },
+    {
+        "name": "씨(C) 옐로막걸리",
+        "type": "Makgeolli",
+        "ingredients": ["쌀", "물", "누룩", "당근", "레몬그라스"],
+        "alcohol_content": 12.0,
+        "region": "서울특별시 강남구",
+        "volume": "500ml",
+        "flavor_profile": {
+            "sweet": 0,
+            "sour": 1,
+            "bitter": 0,
+            "flavor_description": "당도가 높지 않고 과하지 않은 산미를 느낄 수 있는 부드럽고 깔끔한 맛의 막걸리입니다."
+        },
+        "recommendation_phrases": [
+            "당도가 높지 않고 적당한 산미가 어우러진 깔끔한 막걸리입니다.",
+            "레몬그라스와 당근의 향이 더해져 독특한 풍미를 즐길 수 있는 탁주입니다.",
+            "동남아 요리나 해산물과 잘 어울리는 상쾌한 막걸리입니다."
+        ],
+        "pairing": ["동남아요리", "회", "해산물 냉채", "닭고기", "오리고기"],
+        "occasion": "신선한 요리와 함께 독특한 향을 즐기며 특별한 시간을 보내고 싶을 때 추천합니다.",
+        "image_url": "/static/images/M_7.png"
+    },
+    {
+        "name": "경탁주 12도",
+        "type": "Makgeolli",
+        "ingredients": ["쌀(국내산)", "정제수", "국(밀 함유)", "효모", "산도조절제"],
+        "alcohol_content": 12.0,
+        "region": "경기도 수지구",
+        "volume": "500ml",
+        "flavor_profile": {
+            "sweet": 0,
+            "sour": 1,
+            "bitter": 1,
+            "flavor_description": "첫 모금에서는 사과와 배의 과실향이 새콤달콤하게 퍼지고, 마지막에는 드라이한 맛이 조화롭게 느껴지는 묵직한 탁주입니다. 얼음과 함께 마시면 더욱 부드러운 맛을 즐길 수 있습니다."
+        },
+        "recommendation_phrases": [
+            "사과와 배의 과실향이 은은하게 느껴지는 묵직한 탁주입니다.",
+            "새콤달콤한 요거트 맛과 드라이한 마무리가 조화를 이룬 술입니다.",
+            "얼음과 함께 마시면 부드럽게 즐길 수 있는 깊은 맛의 막걸리입니다."
+        ],
+        "pairing": ["수육", "김치", "브리치즈", "제철회"],
+        "occasion": "깊은 맛과 새콤달콤한 과실향을 즐기며 다양한 음식과 잘 어울리는 순간에 추천합니다.",
+        "image_url": "/static/images/M_9.png"
+    },
+    {
+        "name": "얼떨결에 옐로",
+        "type": "Makgeolli",
+        "ingredients": ["쌀(국내산)", "좁쌀(국내산)", "옥수수(국내산)", "정제수", "정제효모", "효모", "젖산(산도조절제)", "기타과당", "곡자(밀)", "밀함유"],
+        "alcohol_content": 6.0,
+        "region": "경기도 성남시",
+        "volume": "935ml",
+        "flavor_profile": {
+            "sweet": 1,
+            "sour": 0,
+            "bitter": 1,
+            "flavor_description": "청량하고 가벼운 맛을 자랑하는 막걸리로, 기존의 묵직한 바디감과 달리 산뜻하고 부드러운 느낌이 특징입니다."
+        },
+        "recommendation_phrases": [
+            "청량하고 가벼운 맛이 특징인 막걸리입니다.",
+            "가볍고 산뜻한 느낌으로 다양한 음식과 잘 어울리는 술입니다.",
+            "막걸리의 부담 없는 맛을 찾는 분들에게 추천하는 청량한 탁주입니다."
+        ],
+        "pairing": ["떡볶이", "샐러드", "치즈"],
+        "occasion": "가벼운 음식과 함께 산뜻한 막걸리를 즐기고 싶을 때 추천합니다.",
+        "image_url": "/static/images/M_9.png"
+    }    
+]
+
+
+
+

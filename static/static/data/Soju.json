@@ -1,0 +1,194 @@
+[
+    {
+        "name": "예술주조무작",
+        "type": "Soju",
+        "alcohol_content": 53.0,
+        "region": "강원도 춘천시",
+        "volume": "500ml",
+        "flavor_profile": {
+            "sweet": 1,
+            "sour": 1,
+            "bitter": 0,
+            "flavor_description": "5년의 옹기 숙성으로 깊고 부드러운 목넘김과 풍부한 맛을 자랑합니다."
+        },
+        "recommendation_phrases": [
+            "옹기 숙성으로 부드럽고 깊은 맛을 느낄 수 있는 고도주입니다.",
+            "자연누룩의 풍미가 고스란히 살아있는 술로, 깊은 여운을 남깁니다.",
+            "53도의 높은 도수와 풍부한 향으로 특별한 순간을 기념하기 좋은 술입니다."
+        ],
+        "pairing": ["소고기 전골", "맑은 대구탕"],
+        "occasion": "진한 맛과 높은 도수를 즐기고 싶을 때 추천합니다.",
+        "image_url": "/static/images/S_1.png"
+    },
+    {
+        "name": "해운대블루스",
+        "type": "Soju",
+        "alcohol_content": 17.3,
+        "region": "전라북도 순창군",
+        "volume": "360ml",
+        "flavor_profile": {
+            "sweet": 0,
+            "sour": 1,
+            "bitter": 0,
+            "flavor_description": "매실의 상큼한 향과 함께 부드럽고 가벼운 목넘김이 돋보이는 술입니다."
+        },
+        "recommendation_phrases": [
+            "매실의 상큼함이 더해져 청량한 맛이 일품인 증류주입니다.",
+            "상쾌한 매실 향과 함께 가볍게 즐길 수 있는 부드러운 맛입니다.",
+            "매실의 신선함을 가득 느낄 수 있는 매력적인 증류주입니다."
+        ],
+        "pairing": ["육류", "해산물", "과일", "치즈"],
+        "occasion": "상쾌한 맛을 원할 때 가볍게 즐기기 좋은 술입니다.",
+        "image_url": "/static/images/S_2.png"
+    },
+    {
+        "name": "담양 죽력고",
+        "type": "Soju",
+        "alcohol_content": 25.0,
+        "region": "전남 담양군",
+        "volume": "350ml",
+        "flavor_profile": {
+            "sweet": 1,
+            "sour": 0,
+            "bitter": 0,
+            "flavor_description": "죽력과 대나무향이 어우러져 은은한 단맛과 함께 깊은 풍미가 느껴집니다."
+        },
+        "recommendation_phrases": [
+            "죽력의 은은한 향과 단맛이 돋보이는 고급 증류주입니다.",
+            "대나무향과 단맛이 어우러져 독특한 풍미를 선사합니다.",
+            "자연스럽게 스며드는 단맛과 깊은 향이 매력적인 술입니다."
+        ],
+        "pairing": ["오리백숙"],
+        "occasion": "풍부한 향과 단맛으로 특별한 자리에서 즐기기 좋습니다.",
+        "image_url": "/static/images/S_3.png"
+    },
+    {
+        "name": "백제소주",
+        "type": "Soju",
+        "alcohol_content": 25.0,
+        "region": "전라북도 부안군",
+        "volume": "375ml",
+        "flavor_profile": {
+            "sweet": 0,
+            "sour": 0,
+            "bitter": 0,
+            "flavor_description": "숙성으로 얻어진 플로럴한 향과 깔끔한 마무리가 돋보입니다."
+        },
+        "recommendation_phrases": [
+            "플로럴한 향이 은은하게 퍼지는 깔끔한 증류주입니다.",
+            "더블 증류로 더욱 맑고 깨끗한 맛을 느낄 수 있습니다.",
+            "숙성 과정에서 얻은 부드러운 맛이 일품인 전통 소주입니다."
+        ],
+        "pairing": ["양고기", "고기국수", "닭곰탕", "만두전골", "명란계란탕"],
+        "occasion": "은은한 향과 깔끔한 맛을 원할 때 즐기기 좋습니다.",
+        "image_url": "/static/images/S_4.png"
+    },
+    {
+        "name": "감이슬",
+        "type": "Soju",
+        "alcohol_content": 23.0,
+        "region": "충남 논산시",
+        "volume": "375ml",
+        "flavor_profile": {
+            "sweet": 1,
+            "sour": 0,
+            "bitter": 1,
+            "flavor_description": "감의 고유한 풍미와 부드러운 단맛이 깔끔하게 어우러진 술입니다."
+        },
+        "recommendation_phrases": [
+            "감의 단맛과 풍미가 살아있는 깔끔한 증류주입니다.",
+            "떫은 감의 단맛이 은은하게 남아 기분 좋은 마무리를 선사합니다.",
+            "감이슬 특유의 단맛과 부드러운 목넘김이 인상적입니다."
+        ],
+        "pairing": ["생선찜"],
+        "occasion": "감의 풍미를 즐기고 싶을 때 깔끔하게 한 잔 하기 좋습니다.",
+        "image_url": "/static/images/S_5.png"
+    },
+    {
+        "name": "원매",
+        "type": "Soju",
+        "alcohol_content": 20.0,
+        "region": "서울특별시 은평구",
+        "volume": "750ml",
+        "flavor_profile": {
+            "sweet": 0,
+            "sour": 0,
+            "bitter": 1,
+            "flavor_description": "황매실의 깊고 진한 향과 약간의 쌉쌀함이 돋보이는 술입니다."
+        },
+        "recommendation_phrases": [
+            "황매실의 향이 깊고 진하게 남는 고급 증류주입니다.",
+            "3년 이상 숙성된 매실의 맛이 부드럽게 퍼지는 술입니다.",
+            "매실의 쌉쌀한 맛과 은은한 단맛이 어우러진 프리미엄 소주입니다."
+        ],
+        "pairing": ["숙주 소고기 볶음"],
+        "occasion": "풍부한 향을 원할 때 여유롭게 즐기기 좋습니다.",
+        "image_url": "/static/images/S_6.png"
+    },
+    {
+        "name": "추사47",
+        "type": "Soju",
+        "ingredients": ["예산사과(100%)", "효모"],
+        "alcohol_content": 47.0,
+        "region": "충청남도 예산군",
+        "volume": "500ml",
+        "flavor_profile": {
+            "sweet": 1,
+            "sour": 0,
+            "bitter": 0,
+            "flavor_description": "예산사과와인에서 재배한 사과로 만든 증류주로, 오크통 숙성을 통해 부드러운 바닐라향과 풍부한 사과향을 즐길 수 있는 특별한 소주입니다."
+        },
+        "recommendation_phrases": [
+            "오크통 숙성을 거쳐 부드러운 바닐라향과 사과향이 어우러진 고급 소주입니다.",
+            "예산사과의 깊은 풍미를 느낄 수 있는 47도의 사과 증류주입니다.",
+            "닭고기, 소고기, 치즈와 함께 즐기기 좋은 풍부한 향과 맛이 특징입니다."
+        ],
+        "pairing": ["닭고기", "소고기", "치즈", "건고구마", "견과류"],
+        "occasion": "특별한 자리에서 풍부한 향과 높은 도수의 사과 증류주를 즐기고 싶을 때 추천합니다.",
+        "image_url": "/static/images/S_7.png"
+    },
+    {
+        "name": "고운달 백자",
+        "type": "Soju",
+        "ingredients": ["오미자(문경산)"],
+        "alcohol_content": 52.0,
+        "region": "경상북도 문경시",
+        "volume": "500ml",
+        "flavor_profile": {
+            "sweet": 1,
+            "sour": 1,
+            "bitter": 1,
+            "flavor_description": "한국 전통 문경도자기에서 숙성되어 오미자 본연의 맛과 향을 담은 맑고 투명한 최고급 증류주입니다."
+        },
+        "recommendation_phrases": [
+            "오미자 본연의 맛과 향이 살아있는 고급 증류주입니다.",
+            "문경도자기에서 숙성되어 전통과 깊이가 느껴지는 깔끔한 술입니다.",
+            "견과류나 육포와 잘 어울리는 52도의 강렬한 증류주입니다."
+        ],
+        "pairing": ["샐러드", "견과류", "육포"],
+        "occasion": "전통과 깊이 있는 맛을 즐기고 싶은 특별한 자리에서 추천합니다.",
+        "image_url": "/static/images/S_8.png"
+    },
+    {
+        "name": "귀감",
+        "type": "Distilled Liquor",
+        "ingredients": ["제주산 감귤과즙", "백설탕", "액상효모", "스테비올배당체", "무수아황산"],
+        "alcohol_content": 25.0,
+        "region": "제주특별자치도 서귀포시",
+        "volume": "350ml",
+        "flavor_profile": {
+            "sweet": 0,
+            "sour": 1,
+            "bitter": 1,
+            "flavor_description": "제주산 감귤을 저온발효와 저온증류로 만든 감귤 소주로, 참나무통에서 숙성하여 감귤 향이 풍부하고 숙성미와 감칠맛이 돋보이는 증류주입니다."
+        },
+        "recommendation_phrases": [
+            "제주 감귤의 향과 숙성미가 어우러진 독특한 감귤 소주입니다.",
+            "감귤 향이 풍부하며 저온 증류와 참나무통 숙성으로 깊은 맛을 느낄 수 있는 술입니다.",
+            "파스타나 북경오리와 함께 즐기기 좋은 감칠맛 있는 제주 특산 증류주입니다."
+        ],
+        "pairing": ["파스타", "북경오리"],
+        "occasion": "제주의 감귤 향과 숙성된 깊은 맛을 즐기고 싶을 때 추천합니다.",
+        "image_url": "/static/images/S_9.png"
+    }
+]

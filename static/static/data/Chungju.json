@@ -1,0 +1,173 @@
+[
+    {
+        "name": "단상지교",
+        "type": "Chungju",
+        "alcohol_content": 16.0,
+        "region": "대전광역시 대덕구",
+        "volume": "750ml",
+        "flavor_profile": {
+            "sweet": 1,
+            "sour": 0,
+            "bitter": 1,
+            "flavor_description": "삼양주의 풍부한 맛과 향이 입안 가득 퍼지는 깔끔한 약주입니다."
+        },
+        "recommendation_phrases": [
+            "삼양주의 깊은 맛과 향이 일품인 술입니다.",
+            "깔끔하면서도 풍부한 향을 느낄 수 있는 약주입니다.",
+            "풍성한 맛과 향으로 특별한 순간을 더욱 빛나게 해줄 술입니다."
+        ],
+        "pairing": ["생선회", "파전", "빈대떡", "육회", "도토리묵무침"],
+        "occasion": "특별한 자리에서 한층 풍미를 더하고 싶을 때 추천합니다.",
+        "image_url": "/static/images/C_1.jpeg"
+    },
+    {
+        "name": "구기홍주 14",
+        "type": "Chungju",
+        "alcohol_content": 14.0,
+        "region": "충남 청양군",
+        "volume": "360ml",
+        "flavor_profile": {
+            "sweet": 1,
+            "sour": 1,
+            "bitter": 1,
+            "flavor_description": "은은한 구기자 향과 깔끔한 목넘김이 특징인 숙성 약주입니다."
+        },
+        "recommendation_phrases": [
+            "구기자의 은은한 향과 깊은 맛이 조화를 이룬 술입니다.",
+            "장시간 숙성으로 깔끔한 마무리가 일품인 약주입니다.",
+            "구기자의 향과 은은한 단맛이 어우러진 부드러운 술입니다."
+        ],
+        "pairing": ["돼지고기 숯불 구이"],
+        "occasion": "은은한 향과 함께 느긋한 시간을 보내고 싶을 때 어울립니다.",
+        "image_url": "/static/images/C_2.jpeg"
+    },
+    {
+        "name": "하늘",
+        "type": "Chungju",
+        "alcohol_content": 18.0,
+        "region": "경기도 양평군",
+        "volume": "375ml",
+        "flavor_profile": {
+            "sweet": 0,
+            "sour": 0,
+            "bitter": 1,
+            "flavor_description": "자연스러운 단맛과 발효 중 생성된 산미와 쓴맛이 조화를 이루는 술입니다."
+        },
+        "recommendation_phrases": [
+            "발효에서 오는 쓴맛과 산미가 풍미를 더하는 깊은 술입니다.",
+            "각종 유기산과 효모가 조화를 이루어 독특한 맛을 느낄 수 있습니다.",
+            "복합적인 맛과 향이 어우러져 한 모금에 깊이를 느낄 수 있는 약주입니다."
+        ],
+        "pairing": ["문어숙회", "민어회", "버섯전골", "회무침"],
+        "occasion": "풍부한 향과 쓴맛을 즐기며 특별한 만찬을 즐길 때 추천합니다.",
+        "image_url": "/static/images/C_3.jpg"
+    },
+    {
+        "name": "모월 연",
+        "type": "Chungju",
+        "alcohol_content": 13.0,
+        "region": "강원 원주시",
+        "volume": "500ml",
+        "flavor_profile": {
+            "sweet": 0,
+            "sour": 1,
+            "bitter": 1,
+            "flavor_description": "달지 않고 상큼하며 곡물의 향이 은은하게 퍼지는 깔끔한 맛이 특징입니다."
+        },
+        "recommendation_phrases": [
+            "100일 이상 발효된 깔끔한 맛과 상쾌한 향이 돋보이는 술입니다.",
+            "달지 않으면서도 상큼한 산미와 곡물의 향이 조화를 이룬 술입니다.",
+            "곡물의 깊은 향이 은은하게 스며들어 상쾌한 마무리를 선사합니다."
+        ],
+        "pairing": ["방어회", "참치회"],
+        "occasion": "상큼한 맛을 원할 때 해산물과 함께 곁들이기 좋습니다.",
+        "image_url": "/static/images/C_4.jpg"
+    },
+    {
+        "name": "복단지",
+        "type": "Chungju",
+        "alcohol_content": 14.0,
+        "region": "경기 여주",
+        "volume": "350ml",
+        "flavor_profile": {
+            "sweet": 1,
+            "sour": 1,
+            "bitter": 0,
+            "flavor_description": "복분자의 싱그러운 단맛과 약주의 깊은 맛이 어우러진 깔끔한 술입니다."
+        },
+        "recommendation_phrases": [
+            "복분자의 달콤함과 약주의 깊은 맛이 조화를 이룬 술입니다.",
+            "갓 딴 복분자의 싱그러움이 부드럽게 퍼지는 약주입니다.",
+            "복분자의 달콤함과 특유의 산미가 아름답게 어우러집니다."
+        ],
+        "pairing": ["장어", "돼지갈비찜", "통닭", "샐러드"],
+        "occasion": "풍부한 향과 맛으로 즐길 수 있는 여유로운 식사에 잘 어울립니다.",
+        "image_url": "/static/images/C_5.jpeg"
+    },
+    {
+        "name": "술아 매화주",
+        "type": "Chungju",
+        "ingredients": ["찹쌀(여주산)", "누룩(국내산)", "정제수", "주정", "매화꽃"],
+        "alcohol_content": 15.0,
+        "region": "경기도 여주시",
+        "volume": "375ml",
+        "flavor_profile": {
+            "sweet": 0,
+            "sour": 0,
+            "bitter": 0,
+            "flavor_description": "여주 햅찹쌀과 국내산 누룩으로 빚은 술로, 저온 숙성을 통해 은은한 매화꽃 향과 풍부한 과실향이 어우러지는 달콤하고 독한 맛을 느낄 수 있습니다."
+        },
+        "recommendation_phrases": [
+            "매화꽃의 은은한 향과 찹쌀의 깊은 맛이 특징인 술입니다.",
+            "자연스러운 꽃향과 과실향이 조화를 이루는 독특한 약주입니다.",
+            "디저트와 함께 즐기기 좋은 달콤하고 독한 술입니다."
+        ],
+        "pairing": ["디저트", "바닐라 아이스크림"],
+        "occasion": "디저트와 함께 특별한 순간을 더욱 달콤하게 즐기고 싶을 때 추천합니다.",
+        "image_url": "/static/images/C_6.jpg"
+    },
+    {
+        "name": "일엽편주",
+        "type": "Chungju",
+        "ingredients": ["찹쌀", "멥쌀(국내산)", "누룩", "정제수", "밀"],
+        "alcohol_content": 15.0,
+        "region": "경상북도 안동시",
+        "volume": "375ml",
+        "flavor_profile": {
+            "sweet": 1,
+            "sour": 0,
+            "bitter": 0,
+            "flavor_description": "하나하나 손으로 정성스럽게 준비한 꽃술을 사용하여, 혀끝에서 꿀 향이, 코끝에서는 아카시아 향이 은은하게 퍼지는 술입니다."
+        },
+        "recommendation_phrases": [
+            "꽃술에서 퍼지는 아카시아 향과 꿀 향이 특징인 술입니다.",
+            "은은한 꽃향과 부드러운 맛이 어우러진 특별한 약주입니다.",
+            "전통 한식과 함께 즐기기 좋은 깔끔한 청주입니다."
+        ],
+        "pairing": ["목이 모르파세", "삼색전"],
+        "occasion": "향긋한 꽃향과 함께 전통 음식을 즐기고 싶을 때 추천합니다.",
+        "image_url": "/static/images/C_7.jpeg"
+    },
+    {
+        "name": "감사",
+        "type": "Chungju",
+        "ingredients": ["쌀(국내산 경기미 100%)", "누룩", "정제수"],
+        "alcohol_content": 14.0,
+        "region": "경기도 용인시",
+        "volume": "375ml",
+        "flavor_profile": {
+            "sweet": 0,
+            "sour": 1,
+            "bitter": 0,
+            "flavor_description": "값진 인연에 감사와 사랑을 전한다는 뜻을 담은 전통 청주로, 주정과 조미료 없이 오로지 멥쌀만으로 빚어 깔끔하고 드라이한 맛이 특징입니다. 부드러운 단맛과 은은한 과실향의 산미가 여운을 남깁니다."
+        },
+        "recommendation_phrases": [
+            "감사와 사랑을 담아 만든 깔끔하고 드라이한 전통 청주입니다.",
+            "부드러운 단맛과 은은한 과실향이 조화를 이루는 술입니다.",
+            "잡채나 불고기와 함께 즐기기 좋은 약주입니다."
+        ],
+        "pairing": ["불고기", "잡채"],
+        "occasion": "감사의 마음을 전하며 전통 한식을 더욱 특별하게 즐기고 싶을 때 추천합니다.",
+        "image_url": "/static/images/C_8.jpeg"
+    }    
+]
